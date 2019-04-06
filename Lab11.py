@@ -101,27 +101,32 @@ def roomDescription(roomIn):#---------------------------------------------------
   if roomIn == 1:
     output = "---------- MUDROOM ---------\n" + \
               "You are in the mudroom.\n" + \
+              "This room is full of dirty clothes and shoes, nothing else to note.\n" + \
               "The living room is through the North door.\n" + \
               "The exit to the house is through the Southern door, but it is will not open."
   elif roomIn == 2:
     output = "-------- LIVING ROOM -------\n" + \
               "You are in the living room.\n" + \
+              "This room contains normal furniture, a television and a fireplace.\n" + \
               "The bed room is through the North door.\n" + \
               "The mud room is through the South door.\n" + \
               "The kitchen is through the West door."
   elif roomIn == 3:
     output = "---------- KITCHEN ---------\n" + \
               "You are in the kitchen.\n" + \
+              "This looks like it was straight out of the 60's.\n" + \
               "The dining room is through the North door.\n" + \
               "The living room is through the East door."
   elif roomIn == 4:
     output = "--------- BED ROOM ---------\n" + \
               "You are in the bed room.\n" + \
+              "Contains a neatly made queen sized bed and a small desk.\n" + \
               "The living room is through the South door.\n" + \
               "The dining room is through the West door."
   elif roomIn == 5:
     output = "-------- DINING ROOM -------\n" + \
               "You are in the dining room.\n" + \
+              "This must be where they ate food, there are four chairs surrounding an empty table.\n" + \
               "The bed room is through the East door.\n" + \
               "The kitchen is through the South door."
   return output
@@ -239,4 +244,4 @@ def laugh(roomIn):
   if (roomIn % 2 == 1):
     printNow("You did it. Sort of. Good luck with the rest of this thing.")
   else:
-    printNow("Kinda weird that you're laughing right now...")
+    printNow("Kinda weird that you're laughing right now...")                                                  

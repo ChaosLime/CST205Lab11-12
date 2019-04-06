@@ -58,16 +58,12 @@ def game():#--------------------------------------------------------------------
     elif userCmd in spMoveCommands():
       spMove(userCmd,roomIn,inventory)
     elif userCmd in controlCommands():
-      otherCommand(userCmd, roomIn,inventory)
+      otherCommand(userCmd, roomIn,inventory,allItems)
     elif userCmd == "exit":
       gameRunning = False
       printNow("\nYou are a quitter.\n")
     else:
       printNow("I do not know that command.")
-
-  
-  
-
 
 def spMove(userCmd, roomIn,inventory):#-------------------------------------------------------------------------------------------------------
   if userCmd == "jump":
@@ -99,7 +95,6 @@ def otherCommand(str, roomIn,inventory):#---------------------------------------
     listInventory(inventory)
   elif str == "examine":
     examineItem(inventory,allItems)
-  
 
 def movementCommands():#---------------------------------------------------------------------------------------------------
   validCommands = ['n', 's', 'e', 'w']
@@ -297,15 +292,11 @@ def win(didWin):
   
   if(didWin):
     printNow("Congratulations! You win the game!")
-    userCmd = "exit"
     gameRunning = False
     
   if(didWin == False):
     printNow("You where killed by a monster, sorry, you lose the game, try again.")
-    userCmd = "exit"
     gameRunning = False
-    
-  return userCmd
 
 def sleep(roomIn):
   if roomIn == 4:

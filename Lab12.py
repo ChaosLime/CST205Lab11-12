@@ -83,7 +83,7 @@ def spMove(userCmd, roomIn,inventory):#-----------------------------------------
   if userCmd == "laugh":
     laugh(roomIn)
 
-def otherCommand(str, roomIn,inventory):#---------------------------------------------------------------------------------------------------
+def otherCommand(str, roomIn,inventory,allItems):#---------------------------------------------------------------------------------------------------
   #define and perform the other actions
   if str == "help":
     printNow(welcomeMsg(roomIn))

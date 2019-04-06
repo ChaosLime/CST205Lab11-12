@@ -1,0 +1,15 @@
+
+
+Turn the game into an 'escape room' style scenario
+
+Combine lab12's a, b, and d action items into the game itself
+
+    - Two items the user needs to acquire key objects while exploring to get access to other rooms to progress (RE game style)
+        - place said items in different locations on the map, each one labeled with a descriptor (e.g. lionhead medalion, key carved in the shape of Spades, etc)
+        - user needs to collect both items to make it to the locked rooms (door with a circular depression on it, door with an engraving of Spades)
+        - inventory would be stored and updated in [] and once user has items and navigates through both rooms successfully, he
+            makes his way out and escapes: he wins and game is over
+        - Conversely, another 'item' is created and placed somewhere in any of the Rooms; this would be the Monster, and if the
+        - user enters that room with that item in it, he's dead, he loses and the game is over
+        - a secret room can be added in whichever manner, and can possibly be one of the rooms that has a required item needed
+            to advance through one of the locked rooms

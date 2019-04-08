@@ -21,9 +21,10 @@
 #  |               |-------- |------|
 #  |               |  Mud Room #1   |
 #  |----------------------|  |------|
-GAMERUNNING = True #want variable to be global to be able to allow other functions
+GAMERUNNING = True #global variable gives the ability to allow other functions
                    #to terminate game
 
+# driver
 def game():#---------------------------------------------------------------------------------------------------
   #by default, player starts in room 1
   global GAMERUNNING
@@ -33,11 +34,11 @@ def game():#--------------------------------------------------------------------
   printNow(roomDescription(roomIn))
 
   allItems = {'medallion':'This medallion has been carved in the shape of a lionhead.\n'+\
-              "There appears to be stange aura that makes you feel safe.",\
-              'key':'This key is oddly shaped like a spade of hearts.'}
+              "You notice a strange aura that makes you feel safe.",\
+              'key':'This key is oddly-shaped like a spade of hearts.'}
   inventory = []
   #medallion is a ward that keeps monster from killing you
-  #key is to open a hidden trap door into the room with monster and exit
+  #key is to open a hidden trap door into the room with a monster but also the place to exit
 
   while GAMERUNNING:
     userCmd = requestString("What do you want to do next?\nType 'Help' for commands.")
@@ -64,6 +65,7 @@ def game():#--------------------------------------------------------------------
     else:
       printNow("I do not know that command.")
 
+# specific moves within specified room with current inventory of items on player
 def spMove(userCmd, roomIn, inventory):#-------------------------------------------------------------------------------------------------------
   if userCmd == "jump":
     jump(roomIn, inventory)
@@ -82,6 +84,7 @@ def spMove(userCmd, roomIn, inventory):#----------------------------------------
   if userCmd == "laugh":
     laugh(roomIn)
 
+# other commands within specified room with current inventory of items on player
 def otherCommand(str, roomIn, inventory, allItems):#---------------------------------------------------------------------------------------------------
   #define and perform the other actions
   if str == "help":
@@ -95,28 +98,34 @@ def otherCommand(str, roomIn, inventory, allItems):#----------------------------
   elif str == "examine":
     examineItem(inventory, allItems)
 
+# valid moves: north, south, east, and west
 def movementCommands():#---------------------------------------------------------------------------------------------------
   validCommands = ['n', 's', 'e', 'w']
   return validCommands
 
+# specific valid moves
 def spMoveCommands():#---------------------------------------------------------------------------------------------------
   validCommands = ['jump', 'dance', 'fall', 'sleep', 'run', 'cry', 'scream', 'laugh']
   return validCommands
 
+# specific valid other commands
 def controlCommands():#---------------------------------------------------------------------------------------------------
   validCommands = ['help', 'look', 'commands', 'examine', 'inventory']
   return validCommands
 
+# lists inventory of items on player
 def listInventory(inventory):#---------------------------------------------------------------------------------------------------
   if len(inventory) > 0:
     for i in inventory:
       printNow(i)
   else:
-    printNow("You do not have any items in your inventory.")
-
+    printNow("You have nothing on you.")
+    
+# add an item to inventory of items on player
 def addToInventory(item, inventory):#---------------------------------------------------------------------------------------------------
   inventory.append(item)
 
+# check if an item is in the inventory of items
 def examineItem(inventory, allItems):#---------------------------------------------------------------------------------------------------
   if len(inventory) > 0:
     userCmd = requestString("What item do you want to examine?")
@@ -127,6 +136,7 @@ def examineItem(inventory, allItems):#------------------------------------------
   else:
     printNow("You do not have any items in inventory.")
 
+# provides a description of each room
 def roomDescription(roomIn):#---------------------------------------------------------------------------------------------------
   #all room definintions/descriptions go here
   output = ""
@@ -135,14 +145,14 @@ def roomDescription(roomIn):#---------------------------------------------------
               "You are in the mudroom.\n" + \
               "This room is full of dirty clothes and shoes, nothing else to note.\n" + \
               "The living room is through the North door.\n" + \
-              "The exit to the house is through the Southern door, but it is will not open."
+              "The exit to the house is through the Southern door, but it will not open."
   elif roomIn == 2:
     output = "-------- LIVING ROOM -------\n" + \
               "You are in the living room.\n" + \
-              "This room contains normal furniture, a television, and a fireplace.\n" + \
-              "The wooden floor in this room would be perfect for dancing on.\n" + \
-              "The bed room is through the North door.\n" + \
-              "The mud room is through the South door.\n" + \
+              "This room contains common furniture, a television, and a fireplace.\n" + \
+              "The wooden floor in this room makes it a perfect place to dance on.\n" + \
+              "The bedroom is through the North door.\n" + \
+              "The mudroom is through the South door.\n" + \
               "The kitchen is through the West door."
   elif roomIn == 3:
     output = "---------- KITCHEN ---------\n" + \
@@ -151,21 +161,22 @@ def roomDescription(roomIn):#---------------------------------------------------
               "The dining room is through the North door.\n" + \
               "The living room is through the East door."
   elif roomIn == 4:
-    output = "--------- BED ROOM ---------\n" + \
-              "You are in the bed room.\n" + \
-              "Contains a neatly made queen sized bed looks perfect for jumping on and a small desk.\n" + \
+    output = "--------- BEDROOM ---------\n" + \
+              "You are in the bedroom.\n" + \
+              "It contains a small desk and a neatly made queen-sized bed, which looks tempting to jump on.\n" + \
               "The living room is through the South door.\n" + \
               "The dining room is through the West door."
   elif roomIn == 5:
     output = "-------- DINING ROOM -------\n" + \
               "You are in the dining room.\n" + \
-              "This must be where they ate food. There are four chairs surrounding an empty table.\n" + \
+              "This must be where they eat food. There are four chairs surrounding an empty table.\n" + \
               "The floor near the table appears to be slippery. Try not to fall.\n"+\
               "Or do...\n" + \
-              "The bed room is through the East door.\n" + \
+              "The bedroom is through the East door.\n" + \
               "The kitchen is through the South door."
   return output
 
+# generates welcome message, description of movement commands and provides other commands 
 def welcomeMsg(roomIn):#---------------------------------------------------------------------------------------------------
   output = "----------------------------------------------\n" + \
            "--------Welcome to my game-------- \n"+ \
@@ -176,6 +187,7 @@ def welcomeMsg(roomIn):#--------------------------------------------------------
            "To get help or quit the game, type 'help' or 'exit'."
   return output
 
+# move player based on direction and specified room
 def move(direction, roomIn):#---------------------------------------------------------------------------------------------------
   #This function will change the room number that the player is currently in
   #by taking the user input as a direction, and figuring out if the direction
@@ -229,12 +241,13 @@ def move(direction, roomIn):#---------------------------------------------------
 
   return roomIn
 
+# lists different types of commands or movements 
 def listCommands():
   print "Move: ", movementCommands()
   print "Special: ", spMoveCommands()
   print "Menu Commands: ", controlCommands()
 
-
+# jump in specified room with items on player
 def jump(roomIn, inventory):
   if roomIn == 4:
     printNow("You climb onto the bed and start jumping on it as you once did as a kid.\n" + \
@@ -246,6 +259,7 @@ def jump(roomIn, inventory):
   else:
     printNow("You jumped. Are you happy?")
 
+# fall in specified room with items on player
 def fall(roomIn, inventory):
   if roomIn == 5:
     printNow("When you fall, you notice a weird object underneath the table.\n"+\
@@ -254,6 +268,7 @@ def fall(roomIn, inventory):
   else:
     printNow("You should probably get up.")
 
+# dance in specified room with items on player
 def dance(roomIn, inventory):
   if (roomIn == 2):
     userCmd = ""
@@ -275,7 +290,7 @@ def dance(roomIn, inventory):
                    "You approach the light, and it leads you outside where it is safe.")
           win(True)
         else:
-          printNow("There is a horrible stench and sound of heavy breathing\n"+\
+          printNow("There is a horrible stench and the sound of heavy breathing\n"+\
                    "A loud screech is made and you feel your body being ripped to pieces")
           win(False)
       elif(userCmd == 'n'):
@@ -287,6 +302,7 @@ def dance(roomIn, inventory):
     printNow("Keep going, like nobody's watching\n" + \
             "Except me...")
 
+# determine if player won
 def win(didWin):
   global GAMERUNNING
 
@@ -297,30 +313,35 @@ def win(didWin):
 
   GAMERUNNING = False
 
+# sleep in specified room
 def sleep(roomIn):
   if roomIn == 4:
-    printNow("Enjoy your rest, in some weirdos bed. You might regret this.")
+    printNow("Enjoy your rest, in some stranger's bed. You might regret this.")
   elif roomIn == 3:
-    printNow("You're in the kitchen, at least go in the bedroom")
+    printNow("You're in the kitchen, at least go in the bedroom.")
   else:
-    printNow("Probably not a good time to sleep. You're in a creepy house\n" + \
+    printNow("It's probably not a good time to sleep. You're in a creepy house\n" + \
               "and trying to get out!")
 
+# run regardless of room
 def run():
   printNow("What are you 6? Grow up!")
 
+# cry in specified room
 def cry(roomIn):
   if (roomIn % 2 == 0):
     printNow("I'm so sorry this happened to you!")
   else:
     printNow("Grow up Peter Pan!")
 
+# scream in specified room
 def scream(roomIn):
   if (roomIn % 2 == 1):
     printNow("I hear you, but I don't care...")
   else:
     printNow("I'd love to help you, but I'm just a wall.")
 
+# laugh in specified room
 def laugh(roomIn):
   if (roomIn % 2 == 1):
     printNow("You did it. Sort of. Good luck with the rest of this thing.")

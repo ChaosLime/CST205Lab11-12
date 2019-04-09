@@ -33,6 +33,7 @@ def game():#--------------------------------------------------------------------
   printNow(welcomeMsg(roomIn))
   printNow(roomDescription(roomIn))
 
+  # dictionary to store name / value pairs of required items user needs to obtain in order to finish game
   allItems = {'medallion':'This medallion has been carved in the shape of a lionhead.\n'+\
               "You notice a strange aura that makes you feel safe.",\
               'key':'This key is oddly-shaped like a spade of hearts.'}
@@ -248,6 +249,8 @@ def listCommands():
   print "Menu Commands: ", controlCommands()
 
 # jump in specified room with items on player
+# the user will need to exectue the jump action at some point in order to trigger the jump() function that
+# advances the gameplay
 def jump(roomIn, inventory):
   if roomIn == 4:
     printNow("You climb onto the bed and start jumping on it as you once did as a kid.\n" + \
@@ -260,6 +263,8 @@ def jump(roomIn, inventory):
     printNow("You jumped. Are you happy?")
 
 # fall in specified room with items on player
+# the user will need to exectue the fall action at some point in order to trigger the fall() function that
+# advances the gameplay
 def fall(roomIn, inventory):
   if roomIn == 5:
     printNow("When you fall, you notice a weird object underneath the table.\n"+\
@@ -269,6 +274,7 @@ def fall(roomIn, inventory):
     printNow("You should probably get up.")
 
 # dance in specified room with items on player
+# the dance() function includes the logic to determine whether the user wins or loses the game
 def dance(roomIn, inventory):
   if (roomIn == 2):
     userCmd = ""
@@ -284,9 +290,10 @@ def dance(roomIn, inventory):
             break
       if(userCmd == 'y'):
         printNow("You enter the hatch.\n" +\
-                 "It is dark, and damp, and suddenly the hatch closes and locks behind you.")
+                 "It is dark and damp, with a sense of dread as you step inside. Suddenly, the hatch closes and locks behind you.")
         if('medallion' in inventory):
-          printNow("You see a distant light in the dark room.\n"+\
+          printNow("To your surprise, the medallion you found earlier starts to glow with a warm, golden aura, and your initial dread immediately dissolves.\n"+\
+                   "You then see a distant light in the dark room.\n"+\
                    "You approach the light, and it leads you outside where it is safe.")
           win(True)
         else:
